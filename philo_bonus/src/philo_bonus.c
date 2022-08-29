@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merkol <merkol@42kocaeli.com.tr>           +#+  +:+       +#+        */
+/*   By: merkol <merkol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:31:05 by merkol            #+#    #+#             */
-/*   Updated: 2022/08/29 00:31:06 by merkol           ###   ########.tr       */
+/*   Updated: 2022/08/29 10:39:19 by merkol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	exit_cycle(t_attr *attr)
 	}
 	sem_close(attr->sem_forks);
 	sem_close(attr->sem_writer);
-	sem_unlink("/philo_forks");
-	sem_unlink("/philo_write");
+	sem_unlink("./philo_forks");
+	sem_unlink("./philo_write");
 }
 
 void	*checkert(void *philo)
@@ -52,6 +52,7 @@ void	*checkert(void *philo)
 			sem_wait(attr->sem_writer);
 			exit(1);
 		}
+		usleep(200);
 		if (ph->c_eat == attr->opt_n)
 			break ;
 	}
@@ -73,8 +74,6 @@ void	life_cycle(t_philo *ph)
 		thnk(ph);
 	}
 	pthread_join(ph->attr->checker_th, NULL);
-	// if (ph->attr->anyone_die)
-	// 	exit(EXIT_FAILURE);
 	exit(EXIT_SUCCESS);
 }
 

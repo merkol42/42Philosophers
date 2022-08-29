@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: merkol <merkol@42kocaeli.com.tr>           +#+  +:+       +#+        */
+/*   By: merkol <merkol@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 00:30:46 by merkol            #+#    #+#             */
-/*   Updated: 2022/08/29 00:30:48 by merkol           ###   ########.tr       */
+/*   Updated: 2022/08/29 10:37:18 by merkol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ int	init_philo(t_attr *attr)
 
 int	init_semaphore(t_attr *attr)
 {
-	sem_unlink("/philo_forks");
-	sem_unlink("/philo_writer");
-	attr->sem_forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, attr->ph_n);
-	attr->sem_writer = sem_open("/philo_writer", O_CREAT, S_IRWXU, 1);
-	if (attr->sem_forks <= SEM_FAILED || attr->sem_writer <= SEM_FAILED)
+	sem_unlink("./philo_forks");
+	sem_unlink("./philo_writer");
+	attr->sem_forks = sem_open("./philo_forks", O_CREAT, S_IRWXU, attr->ph_n);
+	attr->sem_writer = sem_open("./philo_writer", O_CREAT, S_IRWXU, 1);
+	if (attr->sem_forks == SEM_FAILED || attr->sem_writer == SEM_FAILED)
 		return (0);
 	return (1);
 }
